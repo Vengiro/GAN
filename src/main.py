@@ -4,6 +4,7 @@ import torchvision
 import torch
 import argparse
 def main(epoch, batch_size, lr):
+    print(torch.cuda.is_available())
     train_data = torchvision.datasets.MNIST(
         root='./data',
         train=True,
@@ -55,7 +56,7 @@ def main(epoch, batch_size, lr):
             gen_optimizer.step()
             print(f"Epoch: {i}, Batch: {j}, Discriminator Loss: {discr_loss.item()}, Generator Loss: {gen_loss.item()}")
             if j % 100 == 0:
-                torchvision.utils.save_image(fake_img, f"output/{i}_{j}.png")
+                torchvision.utils.save_image(fake_img, f"output/{i}_{j}.png", nrow=10)
 
 
 
@@ -67,7 +68,7 @@ def main(epoch, batch_size, lr):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--epoch", type=int, default=100)
+    parser.add_argument("--epoch", type=int, default=5)
     parser.add_argument("--batch_size", type=int, default=100)
     parser.add_argument("--lr", type=float, default=0.0002)
     args = parser.parse_args()

@@ -28,7 +28,7 @@ class Discriminator(nn.Module):
 
         x = x.view(x.size(0), -1)
         x = self.mlp(x)
-
+        x = nn.functional.sigmoid(x)
         return x
 
 class Discriminator_MNIST(nn.Module):
@@ -52,4 +52,6 @@ class Discriminator_MNIST(nn.Module):
         x = nn.functional.leaky_relu(x, 0.2)
         x = x.view(x.size(0), -1)
         x = self.mlp(x)
+        x = nn.functional.sigmoid(x)
+
         return x

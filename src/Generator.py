@@ -49,7 +49,7 @@ class Generator_MNIST(nn.Module):
         x = self.deConv1(x)
         x = nn.functional.relu(x)
         x = self.deConv2(x)
-        x = nn.functional.tanh(x)
+        x = nn.functional.sigmoid(x)
 
         return x
 
